@@ -52,20 +52,16 @@ enum layer_number {
   _BLE2
 };
 
-
-#define _______ KC_TRNS
-#define XXXXXXX KC_NO
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT( \
   KC_SPC,  KC_BSPC,  KC_F5, LT(_BLE1, KC_ESC) \
 ),
-[_BLE1] = LAYOUT(
-  ADV_ID0, AD_WO_L, LT(_BLE2, BATT_LV), BLE1 \
+[_BLE1] = LAYOUT( \
+  ADV_ID0, AD_WO_L, LT(_BLE2, BATT_LV), _BLE1 \
 ),
-[_BLE2] = LAYOUT(
-  DEL_ID0, BATT_LV, BLE2, _______ \
-),
+[_BLE2] = LAYOUT( \
+  DEL_ID0, BATT_LV, _BLE2, _______ \
+)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
