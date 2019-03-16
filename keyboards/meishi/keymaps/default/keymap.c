@@ -134,6 +134,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
   }
+    switch (keycode) {
+    case BASE:
+            if (record->event.pressed) {
+        set_single_persistent_default_layer(_BASE);
+      }
+      return false;
+      break;
+    case BLE1:
+      if (record->event.pressed) {
+        layer_on(_BLE1);
+        update_tri_layer(_BLE1, _BLE2);
+      } else {
+        layer_off(_LOWER);
+        update_tri_layer(_BLE1, _BLE2);
+      }
+      return false;
+      break;
+    case BLE2:
+      if (record->event.pressed) {
+        layer_on(_BLE2);
+        update_tri_layer(_BLE1, _BLE2);
+      } else {
+        layer_off(_RAISE);
+        update_tri_layer(_BLE1, _BLE2);
+      }
+      return false;
+      break;
+  }
   return true;
 }
 ;
