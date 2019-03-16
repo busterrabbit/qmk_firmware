@@ -40,7 +40,8 @@ enum custom_keycodes {
     ENT_SLP,              /* Deep sleep mode                      */
 	BASE,
 	BLE1,
-	BLE2
+	BLE2,
+  ADJUST
 };
 
 extern keymap_config_t keymap_config;
@@ -49,7 +50,8 @@ extern keymap_config_t keymap_config;
 enum layer_number {
   _BASE=0,
   _BLE1,
-  _BLE2
+  _BLE2,
+  _ADJUST
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -57,10 +59,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_SPC,  KC_BSPC,  KC_F5, LT(_BLE1, KC_ESC) \
 ),
 [_BLE1] = LAYOUT( \
-  ADV_ID0, AD_WO_L, LT(_BLE2, BATT_LV), _BLE1 \
+  ADV_ID0, AD_WO_L, LT(_BLE2, BATT_LV), _______ \
 ),
 [_BLE2] = LAYOUT( \
-  DEL_ID0, BATT_LV, _BLE2, _______ \
+  DEL_ID0, BATT_LV, _______, _______ \
+)
+[_ADJUST] = LAYOUT( \
+  _______, _______, _______, _______ \
 )
 };
 
@@ -144,24 +149,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BLE1:
       if (record->event.pressed) {
         layer_on(_BLE1);
-        update_tri_layer(_BLE1, _BLE2);
+        update_tri_layer(_BLE1, _BLE2, _ADJUST);
       } else {
         layer_off(_BLE1);
-        update_tri_layer(_BLE1, _BLE2);
+        update_tri_layer(_BLE1, _BLE2, _ADJUST);
       }
       return false;
       break;
     case BLE2:
       if (record->event.pressed) {
         layer_on(_BLE2);
-        update_tri_layer(_BLE1, _BLE2);
+        update_tri_layer(_BLE1, _BLE2, _ADJUST);
       } else {
         layer_off(_BLE2);
-        update_tri_layer(_BLE1, _BLE2);
+        update_tri_layer(_BLE1, _BLE2, _ADJUST);
       }
       return false;
       break;
   }
+      case ADJUST:
+      if (record->event.pressed) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      return false;
+      break;
+
+  }
+
   return true;
 }
 ;
