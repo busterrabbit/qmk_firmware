@@ -146,7 +146,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_BLE1);
         update_tri_layer(_BLE1, _BLE2);
       } else {
-        layer_off(_LOWER);
+        layer_off(_BLE1);
         update_tri_layer(_BLE1, _BLE2);
       }
       return false;
@@ -156,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_BLE2);
         update_tri_layer(_BLE1, _BLE2);
       } else {
-        layer_off(_RAISE);
+        layer_off(_BLE2);
         update_tri_layer(_BLE1, _BLE2);
       }
       return false;
